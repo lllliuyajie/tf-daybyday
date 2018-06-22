@@ -18,7 +18,7 @@ bias = tf.Variable(tf.zeros([1]))
 y = Weight * x_data +bias
 
 loss = tf.reduce_mean(tf.square(y - y_data))
-optimizer = tf.train.GradientDescentOptimizer(0.5) # 0.5为学习步长
+optimizer = tf.train.GradientDescentOptimizer(0.5)  # 0.5为学习步长
 train = optimizer.minimize(loss)
 
 # init = tf.initialize_all_variables()    已经废弃的写法

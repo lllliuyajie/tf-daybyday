@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 # palcehoder 占位符，暂时存储变量 从外部传入变量，而不是tf.Variable '内部变量'
@@ -20,9 +21,9 @@ def add_layer(inputs, in_size, out_size, activation_function=None):   # 输入�
 
 
 X_data = np.linspace(-1, 1, 300, dtype=np.float32)[:, np.newaxis]   # linspace产生等差数列 插入新维度
-print(X_data)
+# print(X_data)
 noise = np.random.normal(0, 0.05, X_data.shape).astype(np.float32)
-print(noise)
+# print(noise)
 y_data = np.square(X_data)-0.5 + noise
 
 X_S = tf.placeholder(tf.float32, [None, 1])  # 1 代表只有一个特征值 None 代表可以输入无限个
@@ -40,8 +41,23 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
-for i in range(1000):
+
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)   # 参数表示，将画布分成1行1列，图像画在从左到右从上到下第1块上
+ax.scatter(X_data, y_data)      # 创建散点图
+# plt.ion()  # 交互模式，显示多个窗口
+# plot.imshow()
+
+for i in range(5000):
     sess.run(train, feed_dict={X_S: X_data, Y_S: y_data})
     if i % 50 == 0:
-        print(sess.run(loss, feed_dict={X_S:  X_data, Y_S: y_data}))
+        try:
+            ax.lines.remove(lines[0])
+        except Exception:
+            pass
+        prediction_value = sess.run(prediction, feed_dict={X_S: X_data})
+        lines = ax.plot(X_data, prediction_value, 'r-', lw=3)
+        plt.pause(0.1)
+
+plt.show()
 sess.close()
