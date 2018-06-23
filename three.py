@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # palcehoder 占位符，暂时存储变量 从外部传入变量，而不是tf.Variable '内部变量'
 # 激励函数就是产生非线性特征（光滑可微分）   梯度消失和梯度爆炸 CNN选择relu RNN tanh或者relu
-# 加速神经网络训练就是使用 随机梯度下降（SGD）
+# 加速神经网络训练就是使用 随机梯度下降（SGD）Momentum 更新方法  AdaGrad 更新方法 RMSProp 更新方法 Adam 更新方法
 
 # 定义隐藏层
 def add_layer(inputs, in_size, out_size, activation_function=None):   # 输入的 in_size 就是特征值

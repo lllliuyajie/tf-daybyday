@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 
-
+# 回归问题
 # palcehoder 占位符，暂时存储变量 从外部传入变量，而不是tf.Variable '内部变量'
 # 激励函数就是产生非线性特征（光滑可微分）   梯度消失和梯度爆炸 CNN选择relu RNN tanh或者relu
 
