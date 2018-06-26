@@ -4,13 +4,16 @@ from tensorflow.examples.tutorials.mnist import input_data
 from layer import add
 
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True) # one-hot编码，更合理的计算欧式距离
+print(mnist.train.labels)
 
 
 def compute_accuracy(v_xs, v_ys):
     global prediction
     y_pre = sess.run(prediction, feed_dict={x_s: v_xs})
-    correct_prediction = tf.equal(tf.argmax(y_pre, 1), tf.argmax(v_ys, 1))      # 未看   2018/6/23 14:37
-    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+    # print(y_pre)
+    correct_prediction = tf.equal(tf.argmax(y_pre, 1), tf.argmax(v_ys, 1))      # argmax 按行（1）或者按列（0）算最大值
+    # 了解mnist数据结构的label 2018/6/26
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))      # cast 类似于映射（映射到一个你指定的类型）
     result = sess.run(accuracy, feed_dict={x_s: v_xs, y_s: v_ys})
     return result
 
@@ -27,7 +30,7 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
-for i in range(5000):
+for i in range(1000):
     batch_x, batch_y = mnist.train.next_batch(100)
     sess.run(train, feed_dict={x_s: batch_x, y_s: batch_y})
 
