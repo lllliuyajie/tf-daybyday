@@ -11,7 +11,8 @@ def compute_accuracy(v_xs, v_ys):
     global prediction
     y_pre = sess.run(prediction, feed_dict={x_s: v_xs})
     # print(y_pre)
-    correct_prediction = tf.equal(tf.argmax(y_pre, 1), tf.argmax(v_ys, 1))      # argmax 按行（1）或者按列（0）算最大值
+    correct_prediction = tf.equal(tf.argmax(y_pre, 1), tf.argmax(v_ys, 1))      # argmax 按行（1）或者按列（0）算最大值   返回最大值的下标
+
     # 了解mnist数据结构的label 2018/6/26
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))      # cast 类似于映射（映射到一个你指定的类型）
     result = sess.run(accuracy, feed_dict={x_s: v_xs, y_s: v_ys})
@@ -19,7 +20,7 @@ def compute_accuracy(v_xs, v_ys):
 
 
 # 不是TensorFlow的变量 所以使用 palcehoder
-x_s = tf.placeholder(tf.float32, [None, 784])
+x_s = tf.placeholder(tf.float32, [None, 784])   # None 不规定样本数，但规定大小784
 y_s = tf.placeholder(tf.float32, [None, 10])
 
 prediction = add.add_layer(x_s, 784, 10, activation_function=tf.nn.softmax)
