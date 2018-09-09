@@ -1,7 +1,9 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
-# 卷积核的数字如何定义？！
+# 卷积核的数字如何定义?   一般初始为很小的随机值，无需提前设计 所以均是从经验出发，没有很明确的理论依据，因为使用的是BP 算法 所以在训练中会更新W,B
+# tensorflow中的save 只能保存变量  现在用处不大
+# RNN 循环神经网络
 mnist_data = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 # compute_accuarcy
